@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="span9 center">
+      <div class="row pull-right">
+        <button class="btn btn-small btn-info" id="play" type="button">Play</button>
+        <button class="btn btn-small btn-info" id="pause" type="button">Pause</button>
+        <button class="btn btn-small btn-info" id="next" type="button">Next</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span9 center">
+      <%= render :partial => "songs/current_song" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span9 center">
+      <%= render :partial => "songs/music_queue" %>
+    </div>
+  </div>
+</div>

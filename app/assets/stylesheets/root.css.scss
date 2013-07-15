@@ -1,0 +1,49 @@
+// Place all the styles related to the Root controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.current_song {
+  border: 1px solid #c8c8c8;
+  padding: 10px;
+  height: 75px;
+  width: 800px;
+}
+
+.album_cover {
+  float: left;
+  width: 75px;
+  height: 75px;
+}
+
+.song_name {
+  float: left;
+  margin-left: 85px;
+  width: 300px;
+}
+
+.requested_by {
+  float: left;
+  width: 100px
+}
+
+.clear {
+  clear: both;
+}
+
+.center {
+  float:none;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.song_info ul {
+  margin:0px;
+}
+
+.song_info li {
+  margin-left: -25px;
+  list-style-type: none;
+}
+

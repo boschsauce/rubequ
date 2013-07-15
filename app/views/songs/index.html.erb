@@ -1,0 +1,33 @@
+
+<table id="songs_table" class="table table-striped songs span9 center">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Song Name</th>
+      <th>Album</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @songs.each do |song| %>
+      <tr>
+        <td><img src='<%= song.album_cover %>' height='50' width='50'></td>
+        <td><%= song.name %></td>
+        <td><%= song.band %></td>
+        <td>
+          <%= link_to 'View Song', song, :class => "btn btn-info" %>
+          <% if song.in_queue? %>
+            <button class="btn btn-primary">In Queue</button> 
+          <% else %>
+            <button class="btn btn-primary add_to_queue_button" id="<%= song.id %>">Queue Song</button>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<script>
+$("#songs_table").addTableFilter({
+  labelText: "Search Songs"
+});
+</script>

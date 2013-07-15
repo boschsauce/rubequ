@@ -1,0 +1,33 @@
+#message-center {
+  display: none;
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 50%;
+
+  .alert {
+    margin: 0;
+    padding: 15px 40px;
+    font-size: 1.2em;
+  }
+}
+
+#alert-modal {
+  display: none;
+  width: 400px;
+  margin-left: -200px;
+
+  .modal-header {
+    height: 0;
+  }
+
+  .modal-footer {
+    padding: 10px;
+  }
+
+  .message {
+    padding: 15px 10px;
+    font-size: 1.1em;
+  }
+}
+

@@ -1,0 +1,41 @@
+<div id="myModal" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Upload Music</h3>
+  </div>
+  <div class="modal-body">
+   <p>
+   <%= form_tag '/songs', multipart: true, class: "form-horizontal", id: "musicupload" do %>
+      <div class="control-group">
+        <label class="control-label">Song Name *</label>
+        <div class="controls">
+          <input type="text" id="song_name" name="song[name]" required>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Band/Artist Name *</label>
+        <div class="controls">
+          <input type="text" id="song_band" name="song[band]" required>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Album</label>
+        <div class="controls">
+          <input type="text" id="song_album" name="song[album]">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="inputFile">Song mp3 *</label>
+        <div class="controls">
+          <input type="file" accept=".mp3" id="song_mp3" name="song[mp3]" placeholder="Select File" required>
+        </div>
+      </div>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <%= submit_tag 'Upload Song', class: "btn btn-primary" %>
+  </div>
+  <% end %>
+</div>
+

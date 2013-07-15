@@ -1,0 +1,21 @@
+<script>
+  <% if(flash[:alert]) %>
+    window.initialErrorMessage = "<%= flash[:alert] %>";
+  <% end %>
+
+  <% if(flash[:notice]) %>
+    window.initialInfoMessage = "<%= flash[:notice] %>";
+  <% end %>
+</script>
+<div id="message-center"></div>
+
+<div class="modal" id="alert-modal">
+  <div class="modal-header">&nbsp;</div>
+
+  <div class="message"></div>
+
+  <div class="modal-footer">
+    <a href="#" class="btn btn-primary" data-close>OK</a>
+  </div>
+</div>
+
