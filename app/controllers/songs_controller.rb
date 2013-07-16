@@ -43,14 +43,14 @@ class SongsController < ApplicationController
   end
 
   def play
-    Song.play 
+    Song.play
     @song = Song.current_song
     respond_to do |format|
       format.json  { render :json => @song }
     end
   end
 
-  def pause 
+  def pause
     Song.pause
     @song = Song.current_song
     respond_to do |format|
@@ -58,7 +58,7 @@ class SongsController < ApplicationController
     end
   end
 
-  def next 
+  def next
     Song.next
     @song = Song.current_song
     respond_to do |format|

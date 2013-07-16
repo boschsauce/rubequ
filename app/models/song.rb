@@ -9,9 +9,9 @@ class Song < ActiveRecord::Base
   validates_presence_of :name,
                         :band,
                         :mp3
-  
+
   before_create :set_album_cover
-  
+
   default_scope order('created_at DESC')
 
   def as_json(options={})
@@ -36,7 +36,7 @@ class Song < ActiveRecord::Base
   end
 
   def band_and_song_name_formatted
-    self.band + " " + self.name 
+    self.band + " " + self.name
   end
 
   def set_album_cover
@@ -45,8 +45,8 @@ class Song < ActiveRecord::Base
   end
 
   def lyrics
-    { 
-      :lyrics => SongInformation::Lyrics.new.get_lyrics(self.band, self.name) 
+    {
+      :lyrics => SongInformation::Lyrics.new.get_lyrics(self.band, self.name)
     }
   end
 
@@ -60,18 +60,18 @@ class Song < ActiveRecord::Base
   end
 
   def self.all_in_queue
-    songs = []
     @mpd = Mpd.new("127.0.0.1")
-    return songs unless @mpd.connected? 
+    return songs unless @mpd.connected?
     queued_songs = @mpd.queue
     @mpd.disconnect
 
+    songs = []
     queued_songs.each do |qs|
       song = Song.all.find { |s| s.mp3.path.include?(qs.file) }
       if !song.blank? && Song.current_song != song
-        songs << song 
+        songs << song
       end
-    end 
+    end
     songs
   end
 
@@ -81,10 +81,7 @@ class Song < ActiveRecord::Base
     song = @mpd.current_song
     @mpd.disconnect
     return nil if song.blank?
-    Song.all.each do |s|
-      return s if s.mp3.path.include?(song.file)
-    end
-    nil
+    Song.all.find { |s| s.mp3.path.include?(song.file) }
   end
 
   def add_to_queue
