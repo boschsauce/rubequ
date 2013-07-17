@@ -5,7 +5,7 @@ play = ->
   $("#play").click ->
     jqxhr = $.getJSON("/play", (response) ->
       get_current_song()
-      get_music_queue()
+      get_music_queue(true)
       Rasplay.messageCenter.info("Playing")
     ).fail(->
       Rasplay.messageCenter.error("Something went wrong and we could not play the song.")
@@ -24,7 +24,7 @@ next = ->
     jqxhr = $.getJSON("/next", (response) ->
       console.log "next clicked"
       get_current_song()
-      get_music_queue()
+      get_music_queue(true)
       Rasplay.messageCenter.info("Playing Next Song")
     ).fail(->
       Rasplay.messageCenter.error("Something went wrong and we could not stop the song.")
@@ -33,8 +33,14 @@ next = ->
 refresh = ->
   $("#refresh").click ->
     get_current_song()
-    get_music_queue()
+    get_music_queue(true)
     Rasplay.messageCenter.info("Refreshed")
+
+reload = ->
+  setInterval (->
+    get_current_song()
+    get_music_queue(false)
+  ), 5000
 
 
 get_current_song = ->
@@ -73,28 +79,29 @@ get_current_song = ->
           $("#current-song").parent().show()
       error: (data) ->
 
-get_music_queue = ->
+get_music_queue = (show_spinner) ->
   if $("#music-queue").length > 0
-    opts =
-      lines: 13 # The number of lines to draw
-      length: 20 # The length of each line
-      width: 10 # The line thickness
-      radius: 30 # The radius of the inner circle
-      corners: 1 # Corner roundness (0..1)
-      rotate: 0 # The rotation offset
-      direction: 1 # 1: clockwise, -1: counterclockwise
-      color: "#000" # #rgb or #rrggbb
-      speed: 1 # Rounds per second
-      trail: 60 # Afterglow percentage
-      shadow: false # Whether to render a shadow
-      hwaccel: false # Whether to use hardware acceleration
-      className: "spinner" # The CSS class to assign to the spinner
-      zIndex: 2e9 # The z-index (defaults to 2000000000)
-      top: "auto" # Top position relative to parent in px
-      left: "auto" # Left position relative to parent in px
+    if show_spinner is true
+      opts =
+        lines: 13 # The number of lines to draw
+        length: 20 # The length of each line
+        width: 10 # The line thickness
+        radius: 30 # The radius of the inner circle
+        corners: 1 # Corner roundness (0..1)
+        rotate: 0 # The rotation offset
+        direction: 1 # 1: clockwise, -1: counterclockwise
+        color: "#000" # #rgb or #rrggbb
+        speed: 1 # Rounds per second
+        trail: 60 # Afterglow percentage
+        shadow: false # Whether to render a shadow
+        hwaccel: false # Whether to use hardware acceleration
+        className: "spinner" # The CSS class to assign to the spinner
+        zIndex: 2e9 # The z-index (defaults to 2000000000)
+        top: "auto" # Top position relative to parent in px
+        left: "auto" # Left position relative to parent in px
 
-    target = document.getElementById("music-queue")
-    spinner = new Spinner(opts).spin(target);
+      target = document.getElementById("music-queue")
+      spinner = new Spinner(opts).spin(target);
 
     $.ajax
       url: "/songs_in_queue",
@@ -128,7 +135,8 @@ get_music_queue = ->
             $("#music-queue").html(html)
 
           $("#music-queue").parent().show()
-          spinner.stop()
+          if show_spinner is true
+            spinner.stop()
 
 $(document).ready get_current_song
 $(document).ready get_music_queue
@@ -136,6 +144,7 @@ $(document).ready play
 $(document).ready pause
 $(document).ready next
 $(document).ready refresh
+$(document).ready reload
 
 $(document).on "page:load", get_current_song
 $(document).on "page:load", get_music_queue
