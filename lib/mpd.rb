@@ -7,6 +7,11 @@ class Mpd
   def initialize(address)
     @mpd = MPD.new address, 6600
     connect
+    consume
+  end
+
+  def consume
+    @mpd.consume = true
   end
 
   def connect
@@ -113,67 +118,3 @@ class Mpd
     end
   end
 end
-
-=begin
-
-m = Mpd.new("127.0.0.1")
-m.connect
-
-
-m.play
-=end
-
-=begin
-playlist = m.rasplay_playlist
-
-puts m.songs.inspect
-
-s = m.song_by_file("flyleaf/imsosick.mp3")
-m.queue_add(s)
-
-s = m.song_by_file("beyonce/crazyinlove.mp3")
-m.queue_add(s)
-
-m.play
-=end
-
-#puts m.queue_add(song)
-
-#m.queue_clear
-
-
-
-
-
-
-
-=begin
-m.update_song_list
-
-puts m.songs.inspect
-
-puts m.playlists.inspect
-
-#s = m.song_by_file("alanjackson/rightonthemoney.mp3")
-
-
-#p = m.new_playlist("rasplay")
-#p.add s
-puts m.playlists.first.songs.inspect
-
-s = m.playlists.first.songs.first
-puts "SONG:#{s.inspect}"
-
-p = m.playlists.first
-m.play
-song = m.current_song
-unless song.nil?
-  puts "SONG:#{song.inspect}"
-  puts "Band/Artist:#{m.current_song_artist}"
-  puts "Song:#{m.current_song_name}"
-end
-m.disconnect
-
-=end
-
-
