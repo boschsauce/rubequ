@@ -61,14 +61,16 @@ class Song < ActiveRecord::Base
 
   def self.all_in_queue
     @mpd = Mpd.new("127.0.0.1")
-    return songs unless @mpd.connected?
+    return nil unless @mpd.connected?
     queued_songs = @mpd.queue
+    current_song = @mpd.current_song
     @mpd.disconnect
 
     songs = []
+    song_db = Song.all
     queued_songs.each do |qs|
-      song = Song.all.find { |s| s.mp3.path.include?(qs.file) }
-      if !song.blank? && Song.current_song != song
+      song = song_db.find { |s| s.mp3.path.include?(qs.file) }
+      if !song.blank? && !song.mp3.path.include?(current_song.file)
         songs << song
       end
     end
