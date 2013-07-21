@@ -50,21 +50,21 @@ class Song < ActiveRecord::Base
   end
 
   def in_queue?
-    @mpd = RasplayMpd::Mpd.new
-    @mpd.update_song_list
-    song = @mpd.song_by_file(self.mp3.path.gsub("public/music/", ""))
-    result = song.nil? ? false : @mpd.song_is_in_queue?(song)
-    @mpd.disconnect
+    mpd = RasplayMpd::Mpd.new
+    mpd.update_song_list
+    song = mpd.song_by_file(self.mp3.path.gsub("public/music/", ""))
+    result = song.nil? ? false : mpd.song_is_in_queue?(song)
+    mpd.disconnect
     result
   end
 
   def self.all_in_queue
-    @mpd = RasplayMpd::Mpd.new
-    return nil unless @mpd.connected?
+    mpd = RasplayMpd::Mpd.new
+    return nil unless mpd.connected?
 
-    queued_songs = @mpd.queue
-    current_song = @mpd.current_song
-    @mpd.disconnect
+    queued_songs = mpd.queue
+    current_song = mpd.current_song
+    mpd.disconnect
 
 
     songs = []
@@ -81,36 +81,36 @@ class Song < ActiveRecord::Base
   end
 
   def self.current_song
-    @mpd = RasplayMpd::Mpd.new
-    song = @mpd.current_song
-    @mpd.disconnect
+    mpd = RasplayMpd::Mpd.new
+    song = mpd.current_song
+    mpd.disconnect
     song.blank? ? nil : Song.all.find { |s| s.mp3.path.include?(song.file) }
   end
 
   def add_to_queue
-    @mpd = RasplayMpd::Mpd.new
-    song = @mpd.song_by_file(self.mp3.path.gsub("public/music/", ""))
-    result = @mpd.queue_add(song)
-    @mpd.play if @mpd.current_song.nil?
-    @mpd.disconnect
+    mpd = RasplayMpd::Mpd.new
+    song = mpd.song_by_file(self.mp3.path.gsub("public/music/", ""))
+    result = mpd.queue_add(song)
+    mpd.play if mpd.current_song.nil?
+    mpd.disconnect
     result
   end
 
   def self.play
-    @mpd = RasplayMpd::Mpd.new
-    @mpd.play
-    @mpd.disconnect
+    mpd = RasplayMpd::Mpd.new
+    mpd.play
+    mpd.disconnect
   end
 
   def self.pause
-    @mpd = RasplayMpd::Mpd.new
-    @mpd.pause
-    @mpd.disconnect
+    mpd = RasplayMpd::Mpd.new
+    mpd.pause
+    mpd.disconnect
   end
 
   def self.next
-    @mpd = RasplayMpd::Mpd.new
-    @mpd.next
-    @mpd.disconnect
+    mpd = RasplayMpd::Mpd.new
+    mpd.next
+    mpd.disconnect
   end
 end
