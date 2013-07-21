@@ -91,6 +91,7 @@ class Song < ActiveRecord::Base
     @mpd = RasplayMpd::Mpd.new
     song = @mpd.song_by_file(self.mp3.path.gsub("public/music/", ""))
     result = @mpd.queue_add(song)
+    @mpd.play if @mpd.current_song.nil?
     @mpd.disconnect
     result
   end
