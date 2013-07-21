@@ -1,8 +1,7 @@
 require 'discogs'
 require 'lyricfy'
 
-module SongInformation
-
+module RasplaySongInformation
   class AlbumCover
     def initialize
     end
