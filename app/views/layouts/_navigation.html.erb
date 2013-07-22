@@ -4,12 +4,4 @@
   <li><%= link_to 'Upload Song', '#myModal', :role => "button", :id => 'upload', :"data-toggle" => "modal" %></li>
   <li><%= link_to 'View All Songs', songs_path %></li>
 </ul>
-<!--
-<div class="pull-right">
-  <ul class="nav">
-    <li>
-      <span id="volume-value"></span>% <div id="volume"></div>
-    </li>
-  </ul>
-</div>
--->
+<%= render :partial => "layouts/volume" %>

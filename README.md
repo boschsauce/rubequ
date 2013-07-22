@@ -145,11 +145,14 @@ $ rails s #starts the server
 
 ## Special Thanks!
 
-@archSeer for creating the ruby-mpd gem to interface with the MPD
+@archSeer for creating the most awesome ruby-mpd gem to interface with the MPD
 service.  
 https://github.com/archSeer/ruby-mpd
 
 @javichito - Creating a cool gem to fetch lyrics. 
 https://github.com/javichito/Lyricfy
 
-Everyone else who has helped contribute to Rails, Ruby!
+@buntine - For making a greate ruby gem around the Discogs API.
+https://github.com/buntine/discogs
+
+Everyone else who has helped contribute to Rails, and Ruby!

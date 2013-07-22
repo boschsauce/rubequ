@@ -8,6 +8,9 @@ Rasplay::Application.routes.draw do
   get '/pause', :controller => "songs", :action => "pause"
   get '/next', :controller => "songs", :action => "next"
 
+  post '/volume/:volume', :controller => "root", :action => "update_volume"
+  get '/volume', :controller => "root", :action => "volume"
+
   resources :songs do
     get '/lyrics', :action => "lyrics"
     get '/add_to_queue', :action => "queue_add"

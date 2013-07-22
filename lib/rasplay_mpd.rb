@@ -119,5 +119,10 @@ module RasplayMpd
         nil
       end
     end
+
+    def volume(val=nil)
+      return @mpd.volume if val.nil?
+      @mpd.volume = val
+    end
   end
 end

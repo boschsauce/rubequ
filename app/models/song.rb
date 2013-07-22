@@ -1,5 +1,4 @@
 class Song < ActiveRecord::Base
-  attr_accessor :mpd
 
   if(Rails.env.test? || Rails.env.development?)
     has_attached_file :mp3, :path => "public/music/:file_path/:custom_filename"
