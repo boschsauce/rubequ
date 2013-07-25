@@ -5,6 +5,9 @@ interfaces with the Music Player Deamon (MPD). To allow you to turn your raspber
 pi into a little jukebox. We use ours around the office to play music.
 You can use it on a number of different versions of linux and even OSX.
 
+![picture alt](http://i.imgur.com/fWg0xRI.png?1 "Home Page")
+![picture alt](http://i.imgur.com/BZKeStT.png?1 "All Songs")
+
 ## Installing MPD
 
 On osx you should be able to install it with brew.
