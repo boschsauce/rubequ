@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Rasplay::Application.load_tasks
+Rubequ::Application.load_tasks

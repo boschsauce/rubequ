@@ -1,4 +1,4 @@
-Rasplay::Application.routes.draw do
+Rubequ::Application.routes.draw do
   root :to => 'root#index'
   get '/connected', :controller => "root", :action => "connected"
   get '/current_song', :controller => "songs", :action => "current_song"

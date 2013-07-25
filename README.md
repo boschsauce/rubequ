@@ -1,6 +1,6 @@
-# Welcome to Rasplay
+# Welcome to Rubequ 
 
-Rasplay is a web-application that was made to run on the raspberry pi and 
+Rubequ is a web-application that was made to run on the raspberry pi and 
 interfaces with the Music Player Deamon (MPD). To allow you to turn your raspberry
 pi into a little jukebox. We use ours around the office to play music.
 You can use it on a number of different versions of linux and even OSX.
@@ -19,7 +19,7 @@ On ubuntu you can use apt-get
 $ sudo apt-get install mpd
 ```
 
-## Installing Rasplay
+## Installing Rubequ
 
 Since this is still in development and I haven't been able to figure out a
 way to package the app into a gem. You'll need to git clone the site.
@@ -28,7 +28,7 @@ have to worry about permission issues.
 
 ```
 $ cd ~
-$ git clone git@bitbucket.org:wwilimek/rasplay.git
+$ git clone git@github.com:willywos/rubequ.git
 ```
 
 ## MPD Configuration
@@ -46,7 +46,7 @@ $ mkdir ~/.mpd/
 ### OSX
 
 ```
-music_directory "/Users/willywos/rasplay/public/music/"
+music_directory "/Users/<username>/rubequ/public/music/"
 playlist_directory "~/.mpd/playlists"
 db_file "~/.mpd/database"
 log_file "~/.mpd/log"
@@ -67,7 +67,7 @@ audio_output {
 ### UBUNTU
 
 ```
-music_directory "/Users/willywos/rasplay/public/music/"
+music_directory "/Users/<username>/rubequ/public/music/"
 db_file "~/.mpd/database"
 log_file "~/.mpd/log"
 pid_file "~/.mpd/pid"
@@ -89,7 +89,7 @@ audio_output {
 Raspberry PI
 
 ```
-music_directory "/Users/willywos/rasplay/public/music/"
+music_directory "/Users/<username>/rubequ/public/music/"
 db_file "~/.mpd/database"
 log_file "~/.mpd/log"
 pid_file "~/.mpd/pid"
@@ -110,27 +110,27 @@ audio_output {
 ```
 
 You can see all the other configurations on the [MPD site](http://mpd.wikia.com/wiki/Configuration).
-Make sure to change the music_directory where you downloaded rasplay.
+Make sure to change the music_directory where you downloaded rubequ.
 
 Once the service is configured you have to restart MPD and start it back up again
 so it can read the new configurations. You'll also be able to see any errors
 in your configuration when the server starts up.
 
 ```
-Starting up Rasplay
+Starting up Rubequ
 ```
 
-Since Rasplay is still in development, it's best to just run it in
+Since Rubequ is still in development, it's best to just run it in
 development mode for right now.
 
 Modify the connection settings for the MPD service. If you are running
 MPD on another server/computer. The defaults are below. 
 
 ```
-#~/rasplay/config/initializers/rasplay_mpd_init.rb
+#~/rubequ/config/initializers/rubequ_mpd_init.rb
 
-RasplayMpd.mpd_server = "127.0.0.1"
-RasplayMpd.mpd_port = 6600
+RubequMpd.mpd_server = "127.0.0.1"
+RubequMpd.mpd_port = 6600
 
 ```
 
@@ -138,7 +138,7 @@ If you have the MPD service running it should just start working. You can test i
 uploading some songs and adding the song to the queue.
 
 ```
-$ cd ~/rasplay
+$ cd ~/rubequ
 $ rails s #starts the server
 ```
 

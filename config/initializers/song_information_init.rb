@@ -1,2 +1,2 @@
-require 'rasplay_song_information'
-include RasplaySongInformation
+require 'rubequ_song_information'
+include RubequSongInformation

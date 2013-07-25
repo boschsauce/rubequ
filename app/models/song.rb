@@ -38,18 +38,18 @@ class Song < ActiveRecord::Base
   end
 
   def set_album_cover
-    song_info = RasplaySongInformation::AlbumCover.new
+    song_info = RubequSongInformation::AlbumCover.new
     self.album_cover = song_info.get_cover(self.band_and_song_name_formatted)
   end
 
   def lyrics
     {
-      :lyrics => RasplaySongInformation::Lyrics.new.get_lyrics(self.band, self.name)
+      :lyrics => RubequSongInformation::Lyrics.new.get_lyrics(self.band, self.name)
     }
   end
 
   def in_queue?
-    mpd = RasplayMpd::Mpd.new
+    mpd = RubequMpd::Mpd.new
     mpd.update_song_list
     song = mpd.song_by_file(self.mp3.path.gsub("public/music/", ""))
     result = song.nil? ? false : mpd.song_is_in_queue?(song)
@@ -58,7 +58,7 @@ class Song < ActiveRecord::Base
   end
 
   def self.all_in_queue
-    mpd = RasplayMpd::Mpd.new
+    mpd = RubequMpd::Mpd.new
     return nil unless mpd.connected?
 
     queued_songs = mpd.queue
@@ -80,14 +80,14 @@ class Song < ActiveRecord::Base
   end
 
   def self.current_song
-    mpd = RasplayMpd::Mpd.new
+    mpd = RubequMpd::Mpd.new
     song = mpd.current_song
     mpd.disconnect
     song.blank? ? nil : Song.all.find { |s| s.mp3.path.include?(song.file) }
   end
 
   def add_to_queue
-    mpd = RasplayMpd::Mpd.new
+    mpd = RubequMpd::Mpd.new
     song = mpd.song_by_file(self.mp3.path.gsub("public/music/", ""))
     result = mpd.queue_add(song)
     mpd.play if mpd.current_song.nil?
@@ -96,19 +96,19 @@ class Song < ActiveRecord::Base
   end
 
   def self.play
-    mpd = RasplayMpd::Mpd.new
+    mpd = RubequMpd::Mpd.new
     mpd.play
     mpd.disconnect
   end
 
   def self.pause
-    mpd = RasplayMpd::Mpd.new
+    mpd = RubequMpd::Mpd.new
     mpd.pause
     mpd.disconnect
   end
 
   def self.next
-    mpd = RasplayMpd::Mpd.new
+    mpd = RubequMpd::Mpd.new
     mpd.next
     mpd.disconnect
   end

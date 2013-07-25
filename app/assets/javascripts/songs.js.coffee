@@ -4,7 +4,7 @@
 check_mpd_connected = ->
   jqxhr = $.getJSON("/connected", (response) ->
   ).fail(->
-    Rasplay.messageCenter.error("MPD Server Not Connected!")
+    Rubequ.messageCenter.error("MPD Server Not Connected!")
   )
 
 lyrics = ->
@@ -31,9 +31,9 @@ queue_song = ->
     id = button.attr("id")
     jqxhr = $.getJSON("/songs/" + id + "/add_to_queue", ->
       button.text("In Queue")
-      Rasplay.messageCenter.info("Added Song to Queue")
+      Rubequ.messageCenter.info("Added Song to Queue")
     ).fail(->
-      Rasplay.messageCenter.error("Something went wrong and we could not queue the song.")
+      Rubequ.messageCenter.error("Something went wrong and we could not queue the song.")
     )
 
 $(document).ready queue_song

@@ -3,7 +3,7 @@ class RootController < ApplicationController
   end
 
   def connected
-    mpd = RasplayMpd::Mpd.new
+    mpd = RubequMpd::Mpd.new
     connected = mpd.connected?
     mpd.disconnect
     respond_to do |format|
@@ -12,7 +12,7 @@ class RootController < ApplicationController
   end
 
   def volume
-    mpd = RasplayMpd::Mpd.new
+    mpd = RubequMpd::Mpd.new
     volume = mpd.volume
     mpd.disconnect
     respond_to do |format|
@@ -21,7 +21,7 @@ class RootController < ApplicationController
   end
 
   def update_volume
-    mpd = RasplayMpd::Mpd.new
+    mpd = RubequMpd::Mpd.new
     volume = mpd.volume(params[:volume])
     mpd.disconnect
     respond_to do |format|

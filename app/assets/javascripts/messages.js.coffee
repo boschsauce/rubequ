@@ -1,4 +1,4 @@
-class Rasplay.MessageCenter
+class Rubequ.MessageCenter
   constructor: ->
     @showDelay = 4 #seconds
 
@@ -26,9 +26,9 @@ class Rasplay.MessageCenter
   _hide: =>
     $("#message-center").slideUp("fast")
 
-Rasplay.messageCenter = new Rasplay.MessageCenter()
+Rubequ.messageCenter = new Rubequ.MessageCenter()
 
 $ ->
-  Rasplay.messageCenter.info(window.initialInfoMessage)
-  Rasplay.messageCenter.error(window.initialErrorMessage)
+  Rubequ.messageCenter.info(window.initialInfoMessage)
+  Rubequ.messageCenter.error(window.initialErrorMessage)
 

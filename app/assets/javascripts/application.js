@@ -18,7 +18,7 @@
 //= require bootstrap
 //= require jquery.jplayer.min.js
 //= require json2
-//= require rasplay
+//= require rubequ
 //= require underscore
 //= require jquery.table-filter.js 
 //= require_tree .

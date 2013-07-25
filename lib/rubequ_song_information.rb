@@ -1,7 +1,7 @@
 require 'discogs'
 require 'lyricfy'
 
-module RasplaySongInformation
+module RubequSongInformation
   class AlbumCover
     def initialize
     end

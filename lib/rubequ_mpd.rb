@@ -1,13 +1,13 @@
 require 'ruby-mpd'
 
-module RasplayMpd
+module RubequMpd
   attr_accessor :mpd_server, :mpd_port
 
   class Mpd
     attr_accessor :mpd
 
     def initialize
-      @mpd = MPD.new RasplayMpd.mpd_server, RasplayMpd.mpd_port
+      @mpd = MPD.new RubequMpd.mpd_server, RubequMpd.mpd_port
       connect
       consume
     end

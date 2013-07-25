@@ -6,17 +6,17 @@ play = ->
     jqxhr = $.getJSON("/play", (response) ->
       get_current_song()
       get_music_queue(true)
-      Rasplay.messageCenter.info("Playing")
+      Rubequ.messageCenter.info("Playing")
     ).fail(->
-      Rasplay.messageCenter.error("Something went wrong and we could not play the song.")
+      Rubequ.messageCenter.error("Something went wrong and we could not play the song.")
     )
 
 pause = ->
   $("#pause").click ->
     jqxhr = $.getJSON("/pause", (response) ->
-      Rasplay.messageCenter.info("Song Paused")
+      Rubequ.messageCenter.info("Song Paused")
     ).fail(->
-      Rasplay.messageCenter.error("Something went wrong and we could not pause the song.")
+      Rubequ.messageCenter.error("Something went wrong and we could not pause the song.")
     )
 
 next = ->
@@ -25,16 +25,16 @@ next = ->
       console.log "next clicked"
       get_current_song()
       get_music_queue(true)
-      Rasplay.messageCenter.info("Playing Next Song")
+      Rubequ.messageCenter.info("Playing Next Song")
     ).fail(->
-      Rasplay.messageCenter.error("Something went wrong and we could not stop the song.")
+      Rubequ.messageCenter.error("Something went wrong and we could not stop the song.")
     )
 
 refresh = ->
   $("#refresh").click ->
     get_current_song()
     get_music_queue(true)
-    Rasplay.messageCenter.info("Refreshed")
+    Rubequ.messageCenter.info("Refreshed")
 
 reload = ->
   setInterval (->
