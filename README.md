@@ -32,6 +32,10 @@ have to worry about permission issues.
 ```
 $ cd ~
 $ git clone git@github.com:willywos/rubequ.git
+$ cd rubequ
+$ rake secret > secret_token
+$ rake db:create:all
+$ script/ci #run db updates and tests
 ```
 
 ## MPD Configuration
