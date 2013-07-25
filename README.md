@@ -31,8 +31,9 @@ have to worry about permission issues.
 
 ```
 $ cd ~
-$ git clone git@github.com:willywos/rubequ.git
+$ git clone https://github.com/willywos/rubequ.git
 $ cd rubequ
+$ bundle install
 $ rake secret > secret_token
 $ rake db:create:all
 $ script/ci #run db updates and tests
@@ -48,6 +49,7 @@ In your home directory you need to create a .mpd file and a .mpd directory
 ```
 $ echo >> ~/.mpdconf
 $ mkdir ~/.mpd/
+$ mkdir ~/.mpd/playlists/
 ```
 
 ### OSX
@@ -163,3 +165,4 @@ https://github.com/javichito/Lyricfy
 https://github.com/buntine/discogs
 
 Everyone else who has helped contribute to Rails, and Ruby!
+
