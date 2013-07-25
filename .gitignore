@@ -27,3 +27,4 @@
 /spec/tmp/*
 **.orig
 .project
+secret_token
