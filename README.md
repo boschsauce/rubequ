@@ -1,6 +1,9 @@
-# Welcome to Rubequ 
+# Welcome to Rubequ
 
-Rubequ is a web-application that was made to run on the raspberry pi and 
+[![Build Status](https://api.travis-ci.org/willywos/rubequ.png?branch=master)](https://travis-ci.org/willywos/rubequ)
+
+
+Rubequ is a web-application that was made to run on the raspberry pi and
 interfaces with the Music Player Deamon (MPD). To allow you to turn your raspberry
 pi into a little jukebox. We use ours around the office to play music.
 You can use it on a number of different versions of linux and even OSX.
@@ -134,7 +137,7 @@ Since Rubequ is still in development, it's best to just run it in
 development mode for right now.
 
 Modify the connection settings for the MPD service. If you are running
-MPD on another server/computer. The defaults are below. 
+MPD on another server/computer. The defaults are below.
 
 ```
 #~/rubequ/config/initializers/rubequ_mpd_init.rb
@@ -167,10 +170,10 @@ $ rails s #starts the server
 ## Special Thanks!
 
 @archSeer for creating the most awesome ruby-mpd gem to interface with the MPD
-service.  
+service.
 https://github.com/archSeer/ruby-mpd
 
-@javichito - Creating a cool gem to fetch lyrics. 
+@javichito - Creating a cool gem to fetch lyrics.
 https://github.com/javichito/Lyricfy
 
 @buntine - For making a greate ruby gem around the Discogs API.
