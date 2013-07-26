@@ -1,0 +1,4 @@
+language: ruby
+script: bundle exec script/ci
+rvm:
+  - 2.0.0
