@@ -126,7 +126,8 @@ so it can read the new configurations. You'll also be able to see any errors
 in your configuration when the server starts up.
 
 ```
-Starting up Rubequ
+$ mpd --kill
+$ mpd
 ```
 
 Since Rubequ is still in development, it's best to just run it in
@@ -150,6 +151,17 @@ uploading some songs and adding the song to the queue.
 $ cd ~/rubequ
 $ rails s #starts the server
 ```
+
+## Submitting Pull Requests
+
+1. Fork the project
+2. Create a topic branch
+3. Implement your feature or bug fix
+4. Add tests for your feature or bug fix
+5. Run `script/ci` If your changes are not tested, go back to step 6
+6. If your change affects something in this README, please update it
+7. Commit and push your changes
+8. Submit a pull request
 
 
 ## Special Thanks!
