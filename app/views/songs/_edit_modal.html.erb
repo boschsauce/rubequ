@@ -1,0 +1,32 @@
+<div id="editModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="editSong" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="editSong">Edit Song</h3>
+  </div>
+  <div class="modal-body">
+   <%= form_tag song_path(song), method: "put", class: "form-horizontal", id: "editmusic" do %>
+      <div class="control-group">
+        <label class="control-label">Song Name *</label>
+        <div class="controls">
+          <input type="text" id="song_name" name="song[name]" value="<%= song.name %>" required>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Band/Artist Name *</label>
+        <div class="controls">
+          <input type="text" id="song_band" name="song[band]" value="<%= song.band %>" required>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Album</label>
+        <div class="controls">
+          <input type="text" id="song_album" name="song[album]" value="<%= song.album %>" >
+        </div>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <%= submit_tag 'Update Song', class: "btn btn-primary" %>
+  </div>
+  <% end %>
+</div>

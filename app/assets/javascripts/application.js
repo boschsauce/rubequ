@@ -16,10 +16,8 @@
 //= require jquery.ui.all
 //= require turbolinks
 //= require bootstrap
-//= require jquery.jplayer.min.js
-//= require json2
 //= require rubequ
-//= require underscore
 //= require jquery.table-filter.js 
+//= require underscore
 //= require_tree .
 

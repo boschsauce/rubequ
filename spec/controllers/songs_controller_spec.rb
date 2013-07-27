@@ -23,14 +23,6 @@ describe SongsController do
     end
   end
 
-  describe "GET 'new'" do
-    it "returns http success" do
-      get 'new'
-      assigns(:song).should be_a_new(Song)
-      response.should be_success
-    end
-  end
-
   describe "GET 'show'" do
     it "returns http success" do
       get 'show', :id => @song.id, :format => :json

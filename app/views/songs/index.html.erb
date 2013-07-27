@@ -11,7 +11,7 @@
   <tbody>
     <% @songs.each do |song| %>
       <tr>
-        <td><img src='<%= song.album_cover %>' height='50' width='50'></td>
+        <td><img src='<%= song.album_cover %>' height='50' width='50' class='img-circle'></td>
         <td><%= song.name %></td>
         <td><%= song.band %></td>
         <td>

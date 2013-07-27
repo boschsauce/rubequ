@@ -66,11 +66,6 @@ class SongsController < ApplicationController
     end
   end
 
-  # GET /songs/new
-  def new
-    @song = Song.unscoped.new
-  end
-
   # GET /songs/1/edit
   def edit
   end
