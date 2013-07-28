@@ -13,7 +13,7 @@ Rubequ::Application.routes.draw do
 
   resources :songs do
     get '/lyrics', :action => "lyrics"
-    get '/add_to_queue', :action => "queue_add"
+    get '/add_to_queue', :action => "add_to_queue"
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

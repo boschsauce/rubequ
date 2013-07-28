@@ -1,5 +1,5 @@
 class SongsController < ApplicationController
-  before_action :set_song, only: [:show, :lyrics, :queue_add, :edit, :update, :destroy]
+  before_action :set_song, only: [:show, :lyrics, :add_to_queue, :edit, :update, :destroy]
 
   # GET /songs
   # GET /songs.json
@@ -32,7 +32,7 @@ class SongsController < ApplicationController
     end
   end
 
-  def queue_add
+  def add_to_queue
     respond_to do |format|
       if @song.add_to_queue
         format.json { render json: @song, status: :created }

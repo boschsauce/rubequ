@@ -1,7 +1,7 @@
 class Song < ActiveRecord::Base
 
   if(Rails.env.test? || Rails.env.development?)
-    has_attached_file :mp3, :path => "public/music/:file_path/:custom_filename"
+    has_attached_file :mp3, :path => "public/music/:custom_filename"
   end
 
   validates_presence_of :name,
@@ -57,6 +57,16 @@ class Song < ActiveRecord::Base
     result
   end
 
+  def add_to_queue
+    mpd = RubequMpd::Mpd.new
+    puts "SONG MP3 PATH:#{self.mp3.path.inspect}"
+    song = mpd.song_by_file(self.mp3.path.gsub("public/music/", ""))
+    result = mpd.queue_add(song)
+    mpd.play if mpd.current_song.nil?
+    mpd.disconnect
+    result
+  end
+
   def self.all_in_queue
     mpd = RubequMpd::Mpd.new
     return nil unless mpd.connected?
@@ -84,15 +94,6 @@ class Song < ActiveRecord::Base
     song = mpd.current_song
     mpd.disconnect
     song.blank? ? nil : Song.all.find { |s| s.mp3.path.include?(song.file) }
-  end
-
-  def add_to_queue
-    mpd = RubequMpd::Mpd.new
-    song = mpd.song_by_file(self.mp3.path.gsub("public/music/", ""))
-    result = mpd.queue_add(song)
-    mpd.play if mpd.current_song.nil?
-    mpd.disconnect
-    result
   end
 
   def self.play
