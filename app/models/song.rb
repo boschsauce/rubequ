@@ -59,7 +59,6 @@ class Song < ActiveRecord::Base
 
   def add_to_queue
     mpd = RubequMpd::Mpd.new
-    puts "SONG MP3 PATH:#{self.mp3.path.inspect}"
     song = mpd.song_by_file(self.mp3.path.gsub("public/music/", ""))
     result = mpd.queue_add(song)
     mpd.play if mpd.current_song.nil?

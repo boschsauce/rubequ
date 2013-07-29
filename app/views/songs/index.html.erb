@@ -15,8 +15,8 @@
         <td><%= song.name %></td>
         <td><%= song.band %></td>
         <td>
-          <%= link_to 'View Song', song, :class => "btn btn-info" %>
-          <button class="btn btn-primary add_to_queue_button" id="<%= song.id %>">Queue Song</button>
+          <%= link_to 'View', song, :class => "btn btn-info" %> 
+          <button class="btn btn-primary add_to_queue_button" id="<%= song.id %>">Queue</button>
         </td>
       </tr>
     <% end %>
