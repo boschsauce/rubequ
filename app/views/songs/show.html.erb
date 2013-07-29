@@ -2,34 +2,33 @@
 <div class="container">
   <div class="row">
     <div class="span9 center">
-      <div class="row">
-        <div class="pull-left">
-          <% if @song.in_queue? %>
-            <button class="btn btn-primary">In Queue</button> 
-          <% else %>
-            <button class="btn btn-primary add_to_queue_button" id="<%= @song.id %>">Queue Song</button>
-          <% end %>
-          <button id="lyric_button" class="btn btn-info" target="_blank">Lyrics</button>
-          <a href="<%= @song.mp3_public_path %>" role="button" class="btn" alt="Download mp3" target="_blank" download>Download</a>
-        </div>
-        <div class="pull-right">
-          <%= link_to 'Edit Song', '#editModal', :class => "btn",  :"data-toggle" => "modal" %> 
-          <%= link_to 'Delete Song', @song, :class => "btn btn-danger", :method => :delete, :data => { confirm: 'Are you sure?' } %>
-        </div>
+      <div class="row pull-left">
+        <% if @song.in_queue? %>
+          <button class="btn btn-primary">In Queue</button> 
+        <% else %>
+          <button class="btn btn-primary add_to_queue_button" id="<%= @song.id %>">Queue Song</button>
+        <% end %>
+        <button id="lyric_button" class="btn btn-info" target="_blank">Lyrics</button>
+        <a href="<%= @song.mp3_public_path %>" role="button" class="btn" alt="Download mp3" target="_blank" download>Download</a>
       </div>
-      <div class="row">
-        <div class="span4 center">
-          <img src="<%= @song.album_cover %>"  class="img-circle" border="0" height="100" width="100" alt="<%= @song.name %>">
-          <h4><%= @song.band %> - <%= @song.name %></h4>
-          <%= render :partial => "player", :locals => { :song => @song } %>
-        </div>
-        <div class="span3">
-        </div>
+      <div class="row pull-right">
+        <%= link_to 'Edit Song', '#editModal', :class => "btn",  :"data-toggle" => "modal" %> 
+        <%= link_to 'Delete Song', @song, :class => "btn btn-danger", :method => :delete, :data => { confirm: 'Are you sure?' } %>
       </div>
-      <div class="row">
-        <div class="span9 center"><hr></div>
-        <div id="lyrics" class="span5 center"></div>
-      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span9 center">
+      <br>
+      <img src="<%= @song.album_cover %>"  class="img-circle" border="0" height="100" width="100" alt="<%= @song.name %>">
+      <h4><%= @song.band %> - <%= @song.name %></h4>
+      <%= render :partial => "player", :locals => { :song => @song } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span9 center">
+      <br><br>
+      <div id="lyrics"></div>
     </div>
   </div>
 </div>
