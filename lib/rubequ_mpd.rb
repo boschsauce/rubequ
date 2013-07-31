@@ -18,7 +18,7 @@ module RubequMpd
 
     def connect
       begin
-        @mpd.connect 
+        @mpd.connect
       rescue
         puts "Could not connect to MPD server."
         nil
@@ -101,7 +101,13 @@ module RubequMpd
 
     def song_is_in_queue?(s)
       return false if s.nil?
-      @mpd.queue.include?(s) 
+      files_in_queue = @mpd.queue.map(&:file)
+      return false if files_in_queue.nil?
+
+      files_in_queue.each do |f|
+        return true if f == s.file
+      end
+      return false
     end
 
     def queue_remove(s)

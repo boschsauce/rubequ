@@ -38,7 +38,7 @@ class Song < ActiveRecord::Base
   end
 
   def self.by_file(file)
-    Song.all.find { |s| s.mp3.path.include?(file) } unless file.blank?
+    Song.all.find { |s| s.mp3.path.gsub("public/music/", "") == file } unless file.blank?
   end
 
   def set_album_cover
@@ -84,7 +84,7 @@ class Song < ActiveRecord::Base
     current_song_file = current_song.blank? ? nil : current_song.file
 
     queued_songs.each do |qs|
-      song = song_db.find { |s| s.mp3.path.include?(qs.file) }
+      song = song_db.find { |s| s.mp3.path.gsub("public/music/", "") == qs.file }
       if !song.blank? && song.mp3.path.gsub("public/music/", "") != current_song_file
         songs << song
       end
