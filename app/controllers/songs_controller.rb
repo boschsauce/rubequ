@@ -66,10 +66,6 @@ class SongsController < ApplicationController
     end
   end
 
-  # GET /songs/1/edit
-  def edit
-  end
-
   # POST /songs
   # POST /songs.json
   def create
@@ -79,7 +75,7 @@ class SongsController < ApplicationController
         format.html { redirect_to @song, notice: 'Song was successfully created.' }
         format.json { render action: 'show', status: :created, location: @song }
       else
-        format.html { render action: 'new' }
+        format.js   { render :template => 'songs/error' }
         format.json { render json: @song.errors, status: :unprocessable_entity }
       end
     end
@@ -90,10 +86,10 @@ class SongsController < ApplicationController
   def update
     respond_to do |format|
       if @song.update(song_params)
-        format.html { redirect_to @song, notice: 'Song was successfully updated.' }
+        format.js   { render template: 'songs/update' } 
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.js   { render template: 'songs/error' }
         format.json { render json: @song.errors, status: :unprocessable_entity }
       end
     end

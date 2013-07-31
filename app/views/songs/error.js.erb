@@ -1,0 +1,15 @@
+<% if @song.errors.any? %>
+    $("#song_notice").html("");
+    var html = "<div id=\"error_explanation\" class=\"alert alert-error\">";
+    html += "<h4>Oops we had some problems</h4>";
+    html += "<ul>";
+    <% @song.errors.full_messages.each do |msg| %>
+      html += "<li><%= h msg %></li>";
+    <% end %>
+    html += "</ul>";
+    html += "</div>";
+    $("#song_notice").html(html);
+<% else %>
+    $("#song_notice").html("");
+<% end %>
+

@@ -4,17 +4,18 @@
     <h3 id="editSong">Edit Song</h3>
   </div>
   <div class="modal-body">
-   <%= form_tag song_path(song), method: "put", class: "form-horizontal", id: "editmusic" do %>
+   <div id='song_notice'></div>
+   <%= form_tag song_path(song), method: "put", remote: true, authenticity_token: true, class: "form-horizontal", id: "editmusic" do %>
       <div class="control-group">
         <label class="control-label">Song Name *</label>
         <div class="controls">
-          <input type="text" id="song_name" name="song[name]" value="<%= song.name %>" required>
+          <input type="text" id="song_name" name="song[name]" value="<%= song.name %>">
         </div>
       </div>
       <div class="control-group">
         <label class="control-label">Band/Artist Name *</label>
         <div class="controls">
-          <input type="text" id="song_band" name="song[band]" value="<%= song.band %>" required>
+          <input type="text" id="song_band" name="song[band]" value="<%= song.band %>">
         </div>
       </div>
       <div class="control-group">

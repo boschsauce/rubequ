@@ -30,13 +30,6 @@ describe SongsController do
     end
   end
 
-  describe "GET 'edit'" do
-    it "returns http success" do
-      get 'edit', :id => @song.id
-      response.should be_success
-    end
-  end
-
   describe "GET 'lyrics'" do
     it "returns http success" do
       get 'lyrics', :song_id => @song.id, :format => :json
@@ -63,13 +56,33 @@ describe SongsController do
         post :create, {:song => { "name" => "" }, :format => :json }
         assigns(:song).should be_a_new(Song)
       end
+
+      it "renders the error template when errors are found" do
+        Song.any_instance.stub(:save).and_return(false)
+        post :create, {:song => { "name" => "" }, :format => :js }
+        response.should render_template("songs/error")
+      end
     end
   end
 
   describe "PUT 'update'" do
+    it "returns songs update template when update is success" do
+      put 'update', { :id => @song.id, :song => valid_attributes, :format => :js }
+      response.should render_template("songs/update")
+      response.should be_success
+    end
+
     it "returns updated song in json format" do
       put 'update', { :id => @song.id, :song => valid_attributes, :format => :json }
       response.should be_success
+    end
+
+    describe "with invalid params" do
+      it "renders the error template when errors are found" do
+        Song.any_instance.stub(:save).and_return(false)
+        put :update, {:id => @song.id, :song => { "name" => "" }, :format => :js }
+        response.should render_template("songs/error")
+      end
     end
   end
 

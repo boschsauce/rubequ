@@ -21,7 +21,7 @@
     <div class="span9 center">
       <br>
       <img src="<%= @song.album_cover %>"  class="img-circle" border="0" height="100" width="100" alt="<%= @song.name %>">
-      <h4><%= @song.band %> - <%= @song.name %></h4>
+      <h4 id='band_song_name'><%= @song.band_and_song_name_formatted %></h4>
       <%= render :partial => "player", :locals => { :song => @song } %>
     </div>
   </div>

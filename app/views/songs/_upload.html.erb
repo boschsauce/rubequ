@@ -4,8 +4,9 @@
     <h3>Upload Music</h3>
   </div>
   <div class="modal-body">
+   <div id="song_notice"></div>
    <p>
-   <%= form_tag '/songs', multipart: true, class: "form-horizontal", id: "musicupload" do %>
+   <%= form_tag '/songs', remote: true, multipart: true, authenticity_token: true, class: "form-horizontal", id: "musicupload" do %>
       <div class="control-group">
         <label class="control-label">Song Name *</label>
         <div class="controls">
