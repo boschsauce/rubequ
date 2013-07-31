@@ -37,6 +37,10 @@ class Song < ActiveRecord::Base
     self.band + " " + self.name
   end
 
+  def self.by_file(file)
+    Song.all.find { |s| s.mp3.path.include?(file) } unless file.blank?
+  end
+
   def set_album_cover
     song_info = RubequSongInformation::AlbumCover.new
     self.album_cover = song_info.get_cover(self.band_and_song_name_formatted)
@@ -92,7 +96,7 @@ class Song < ActiveRecord::Base
     mpd = RubequMpd::Mpd.new
     song = mpd.current_song
     mpd.disconnect
-    song.blank? ? nil : Song.all.find { |s| s.mp3.path.include?(song.file) }
+    song.blank? ? nil : Song.by_file(song.file)
   end
 
   def self.play
