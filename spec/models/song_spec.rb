@@ -67,6 +67,11 @@ describe Song do
   end
 
   describe "music player controls " do
+    it "should validate that next is called" do
+      @mpd_mock.should_receive(:next)
+      Song.next
+    end
+
     it "should validate that play is called" do
       @mpd_mock.should_receive(:play)
       Song.play
