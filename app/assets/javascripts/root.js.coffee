@@ -77,7 +77,6 @@ get_current_song = ->
           html += "</div>"
           $("#current-song").html(html)
           $("#current-song").parent().show()
-      error: (data) ->
 
 get_music_queue = (show_spinner) ->
   if $("#music-queue").length > 0
