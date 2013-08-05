@@ -166,6 +166,14 @@ $ rails s #starts the server
 7. Commit and push your changes
 8. Submit a pull request
 
+## Trello
+
+I use Trello to track changes and new features. You can see the board below and use it at [https://trello.com/b/Ao1Ch7pG/rubequ](https://trello.com/b/Ao1Ch7pG/rubequ)
+
+![picture alt](https://trello.com/b/Ao1Ch7pG.png "RuBeQu Trello Board")
+
+
+
 
 ## Special Thanks!
 
