@@ -82,7 +82,23 @@ describe Song do
       queued_song_ids.should_receive(:delete).with("2")
       Song.all_in_queue
     end
+
+    it "should sort the songs in the queue based on the ids that come back from mpd queue song ids" do
+      queued_song_ids = ["1", "2", "3"]
+      @mpd_mock.stub(:queued_song_ids).and_return(queued_song_ids)
+      @mpd_mock.stub(:current_song_id).and_return(nil)
+
+      @song_one   = FactoryGirl.build(:song, :id => "1")
+      @song_two   = FactoryGirl.build(:song, :id => "2")
+      @song_three = FactoryGirl.build(:song, :id => "3")
+
+      unsorted_songs_array = [@song_three, @song_one, @song_two]
+
+      Song.stub_chain(:unscoped, :where).with({:id => queued_song_ids}).and_return(unsorted_songs_array)
+      Song.all_in_queue.should eq [@song_one, @song_two, @song_three]
+    end
   end
+
   describe "music player controls " do
     it "should validate that next is called" do
       @mpd_mock.should_receive(:next)

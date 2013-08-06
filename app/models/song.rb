@@ -76,8 +76,11 @@ class Song < ActiveRecord::Base
     current_song_id = mpd.current_song_id
     mpd.disconnect
 
-    queued_song_ids.delete(current_song_id)
-    Song.unscoped.where(:id => queued_song_ids)
+    queued_song_ids.delete(current_song_id) unless current_song_id.blank?
+    songs = Song.unscoped.where(:id => queued_song_ids)
+    songs.blank? ? nil : songs.sort_by! { |u|
+      queued_song_ids.index(u.id.to_s)
+    }
   end
 
   def self.current_song

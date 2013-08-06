@@ -99,8 +99,8 @@ module RubequMpd
 
     def queued_song_ids
       q = queue
-      q.nil? ? nil : q.map { |s| 
-        s.file.gsub(".mp3", "") 
+      q.nil? ? nil : q.map { |s|
+        s.file.gsub(".mp3", "")
       }
     end
 
