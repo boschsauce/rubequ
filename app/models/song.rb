@@ -72,24 +72,12 @@ class Song < ActiveRecord::Base
 
   def self.all_in_queue
     mpd = RubequMpd::Mpd.new
-    return nil unless mpd.connected?
-
-    queued_songs = mpd.queue
-    current_song = mpd.current_song
+    queued_song_ids = mpd.queued_song_ids
+    current_song_id = mpd.current_song_id
     mpd.disconnect
 
-
-    songs = []
-    song_db = Song.all
-    current_song_file = current_song.blank? ? nil : current_song.file
-
-    queued_songs.each do |qs|
-      song = song_db.find { |s| s.mp3.path.gsub("public/music/", "") == qs.file }
-      if !song.blank? && song.mp3.path.gsub("public/music/", "") != current_song_file
-        songs << song
-      end
-    end
-    songs
+    queued_song_ids.delete(current_song_id)
+    Song.unscoped.where(:id => queued_song_ids)
   end
 
   def self.current_song

@@ -66,6 +66,23 @@ describe Song do
     end
   end
 
+  describe "all in queue" do
+    it "should return all songs in the queue" do
+      @mpd_mock.stub(:queued_song_ids).and_return(["4", "2", "1"])
+      @mpd_mock.stub(:current_song_id).and_return("2")
+      Song.stub(:unscoped).and_return(Song)
+      Song.should_receive(:where).with({:id => ["4", "1"]})
+      Song.all_in_queue
+    end
+
+    it "should delete current song from queue songs" do
+      queued_song_ids = ["1", "2", "3"]
+      @mpd_mock.stub(:queued_song_ids).and_return(queued_song_ids)
+      @mpd_mock.stub(:current_song_id).and_return("2")
+      queued_song_ids.should_receive(:delete).with("2")
+      Song.all_in_queue
+    end
+  end
   describe "music player controls " do
     it "should validate that next is called" do
       @mpd_mock.should_receive(:next)

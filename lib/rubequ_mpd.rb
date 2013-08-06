@@ -37,6 +37,11 @@ module RubequMpd
       @mpd.current_song
     end
 
+    def current_song_id
+      cs = current_song
+      cs.nil? ? nil : cs.file.gsub(".mp3", "")
+    end
+
     def play
       @mpd.play
     end
@@ -90,6 +95,13 @@ module RubequMpd
 
     def queue
       @mpd.queue.sort_by &:pos
+    end
+
+    def queued_song_ids
+      q = queue
+      q.nil? ? nil : q.map { |s| 
+        s.file.gsub(".mp3", "") 
+      }
     end
 
     def queue_add(s)
