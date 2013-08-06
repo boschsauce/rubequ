@@ -107,35 +107,34 @@ get_music_queue = (show_spinner) ->
       dataType: "json",
       success: (data) ->
         if data != null
-          if data.length > 0
-            $("#music-queue").html("<h4>Music Queue</h4>")
-            $.each data, (key, val) ->
-              html = "<div class='row'>"
-              html += "<table class='table'>"
-              html += "<tr>"
-              html += "<td class='span2'><img id='album-cover' src='" + val.album_cover +  "' height='100' width='100' class='img-circle'></td>"
-              html += "<td class='span9'>"
-              html += "<strong><div id='band-name'>" + val.band + "</div></strong>"
-              html += "<ul class='song_info'>"
-              html += "<li id='song-name'>" + val.name + "</li>"
-              html += "<li><a id='song-url' href='" + val.mp3_path + "' download><i class='icon-download'></i> Download</a></i>"
-              html += "<li><a href='/songs/" + val.id + "' class='btn btn-small btn-info' id='song-info' data-id='" + val.id + "'>Song Info</a></li>"
-              html += "</ul>"
-              html += "</tr>"
-              html += "</table>"
-              html += "</div>"
-              $("#music-queue").append(html)
-          else
-            html =  "<h4>Music Queue</h4>"
-            html += "<hr>"
-            html += "<div class='row'>"
-            html += "<h5>No Songs in the Queue</h5>"
+          $("#music-queue").html("<h4>Music Queue</h4>")
+          $.each data, (key, val) ->
+            html = "<div class='row'>"
+            html += "<table class='table'>"
+            html += "<tr>"
+            html += "<td class='span2'><img id='album-cover' src='" + val.album_cover +  "' height='100' width='100' class='img-circle'></td>"
+            html += "<td class='span9'>"
+            html += "<strong><div id='band-name'>" + val.band + "</div></strong>"
+            html += "<ul class='song_info'>"
+            html += "<li id='song-name'>" + val.name + "</li>"
+            html += "<li><a id='song-url' href='" + val.mp3_path + "' download><i class='icon-download'></i> Download</a></i>"
+            html += "<li><a href='/songs/" + val.id + "' class='btn btn-small btn-info' id='song-info' data-id='" + val.id + "'>Song Info</a></li>"
+            html += "</ul>"
+            html += "</tr>"
+            html += "</table>"
             html += "</div>"
-            $("#music-queue").html(html)
+            $("#music-queue").append(html)
+        else
+          html =  "<h4>Music Queue</h4>"
+          html += "<hr>"
+          html += "<div class='row'>"
+          html += "<h5>No Songs in the Queue</h5>"
+          html += "</div>"
+          $("#music-queue").html(html)
 
-          $("#music-queue").parent().show()
-          if show_spinner is true
-            spinner.stop()
+        $("#music-queue").parent().show()
+        if show_spinner is true
+          spinner.stop()
 
 $(document).ready get_current_song
 $(document).ready get_music_queue
