@@ -7,7 +7,7 @@ describe Song do
     @mpd_mock = double
     @mpd_mock.stub(:disconnect)
     RubequMpd::Mpd.stub(:new).and_return(@mpd_mock)
-    @song = FactoryGirl.build(:song)
+    @song = FactoryGirl.build(:song, :play_count => 1)
   end
 
   it "should validate that name can not be blank" do
@@ -39,12 +39,21 @@ describe Song do
   end
 
   describe "add to queue" do
-    it "should call add to queue in mpd lib" do
+    before(:each) do
       @music_struct = Music.new("test.mp3")
       @mpd_mock.stub(:current_song).and_return(Music.new("1.mp3"))
       @mpd_mock.stub(:song_by_file).and_return(@music_struct)
+    end
+
+    it "should call add to queue in mpd lib" do
       @mpd_mock.should_receive(:queue_add).with(@music_struct)
       @song.add_to_queue
+    end
+
+    it "should increment the play count when added to the queue" do
+      @mpd_mock.should_receive(:queue_add).with(@music_struct)
+      @song.add_to_queue
+      @song.play_count.should eq 2
     end
   end
 

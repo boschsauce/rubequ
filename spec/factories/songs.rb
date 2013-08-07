@@ -8,5 +8,7 @@ FactoryGirl.define do
     album_cover "http://a5.mzstatic.com/us/r1000/086/Features/1f/76/c9/dj.uqxkqdqp.170x170-75.jpg"
     release_date "2011-06-21 00:00:00"
     mp3 File.new(Rails.root + 'spec/factories/music/ImSexyAndIKnowIt.mp3')
+    play_count 0
+    last_played Time.now
   end
 end

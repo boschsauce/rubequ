@@ -21,7 +21,9 @@ class Song < ActiveRecord::Base
       :name         => self.name,
       :release_date => self.release_date_formatted,
       :mp3_path     => self.mp3_public_path,
-      :in_queue     => self.in_queue?
+      :in_queue     => self.in_queue?,
+      :play_count   => self.play_count,
+      :last_played  => self.last_played
     }
   end
 
@@ -67,6 +69,10 @@ class Song < ActiveRecord::Base
     result = mpd.queue_add(song)
     mpd.play if mpd.current_song.nil?
     mpd.disconnect
+
+    self.increment(:play_count, 1)
+    self.last_played = Time.now
+    self.save!
     result
   end
 
