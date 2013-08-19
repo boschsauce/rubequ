@@ -7,7 +7,7 @@ class RootController < ApplicationController
     connected = mpd.connected?
     mpd.disconnect
     respond_to do |format|
-      format.json { render :json => connected } 
+      format.json { render :json => connected }
     end
   end
 
@@ -16,7 +16,7 @@ class RootController < ApplicationController
     volume = mpd.volume
     mpd.disconnect
     respond_to do |format|
-      format.json { render :json => volume } 
+      format.json { render :json => volume }
     end
   end
 

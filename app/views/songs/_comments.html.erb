@@ -1,0 +1,19 @@
+<br>
+<div class="span4 center">
+  <ul class="comment center" id="comment_list">
+  <% @song.comments.each do |c| %>
+    <li>
+      <%= c.comment_text %><br>
+      <i><small>Posted:<%= time_ago_in_words(c.created_at) %> ago</small></i>
+      <div class='pull-right'>
+        <%= link_to '', song_comment_path(@song, c), :class => 'icon-trash', :method => :delete, :confirm => "Are you sure?" %>
+      </div>
+    </li>
+  <% end %>
+  </ul>
+  <%= form_for([@song, @comment], :remote => true) do |f| %>
+    <%= f.text_area(:comment_text, :size => "5x5", :class => "span4") %>
+    <%= f.submit "Comment", :class => "btn btn-info pull-right" %>
+  <% end %>
+</div>
+<br><br>

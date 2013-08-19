@@ -1,0 +1,10 @@
+
+var html = "<li>"
+html += "<%= @comment.comment_text %><br>"
+html += "<i><small>Posted:<%= time_ago_in_words(@comment.created_at) %> ago</small></i>"
+html += "<div class='pull-right'>"
+html += "<a class='icon-trash' data-confirm='Are you sure?' data-method='delete' href='/songs/<%= @song.id %>/comments/<%= @comment.id %>' rel='nofollow'></a>"
+html += "</div>"
+html += "</li>"
+
+$("#comment_list").append(html)

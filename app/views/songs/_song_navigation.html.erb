@@ -1,0 +1,12 @@
+<div class="row pull-left">
+  <% if @song.in_queue? %>
+    <%= button_tag "In Queue", :class => "btn btn-primary" %>
+  <% else %>
+    <%= button_tag "Queue Song", :class => "btn btn-primary add_to_queue_button", :id => @song.id %>
+  <% end %>
+  <%= link_to 'Download', @song.mp3_public_path, :class => "btn", :alt => "Download mp3" %>
+</div>
+<div class="row pull-right">
+  <%= link_to 'Edit Song', '#editModal', :class => "btn",  :"data-toggle" => "modal" %>
+  <%= link_to 'Delete Song', @song, :class => "btn btn-danger", :method => :delete, :data => { confirm: 'Are you sure?' } %>
+</div>

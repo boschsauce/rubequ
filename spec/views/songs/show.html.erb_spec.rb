@@ -7,6 +7,7 @@ describe "songs/show.html.erb" do
     @song.stub(:in_queue?).and_return(false)
     @song.stub(:last_played).and_return(2.days.ago)
     @song.stub(:play_count).and_return(6)
+    @comment = FactoryGirl.build(:comment)
   end
 
   it "should render song informaiton" do

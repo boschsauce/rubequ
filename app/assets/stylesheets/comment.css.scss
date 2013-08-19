@@ -1,0 +1,17 @@
+
+.comment {
+}
+
+.comment ul {
+}
+
+.comment li {
+  list-style-type: none;
+  padding: 10px;
+  border-top: 1px solid #E5E5E5;
+  text-align: left;
+}
+
+.comment li:nth-child(odd) {
+  background-color: #F1F1F1;
+}

@@ -3,7 +3,7 @@ Rubequ::Application.routes.draw do
   get '/connected', :controller => "root", :action => "connected"
   get '/current_song', :controller => "songs", :action => "current_song"
   get '/songs_in_queue', :controller => "songs", :action => "songs_in_queue"
-  
+
   get '/play', :controller => "songs", :action => "play"
   get '/pause', :controller => "songs", :action => "pause"
   get '/next', :controller => "songs", :action => "next"
@@ -14,6 +14,7 @@ Rubequ::Application.routes.draw do
   resources :songs do
     get '/lyrics', :action => "lyrics"
     get '/add_to_queue', :action => "add_to_queue"
+    resources :comments
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -55,7 +56,7 @@ Rubequ::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

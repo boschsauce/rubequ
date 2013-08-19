@@ -1,5 +1,7 @@
 class Song < ActiveRecord::Base
 
+  has_many :comments
+
   if(Rails.env.test? || Rails.env.development?)
     has_attached_file :mp3, :path => "public/music/:custom_filename"
   end

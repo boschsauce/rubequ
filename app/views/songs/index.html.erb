@@ -11,12 +11,12 @@
   <tbody>
     <% @songs.each do |song| %>
       <tr>
-        <td><img src='<%= song.album_cover %>' height='50' width='50' class='img-circle'></td>
+        <td><%= link_to image_tag(song.album_cover, :height => '50', :width => '50', :class => 'img-circle'), song %></td>
         <td><%= song.name %></td>
         <td><%= song.band %></td>
         <td>
           <%= link_to 'View', song, :class => "btn btn-info" %>
-          <button class="btn btn-primary add_to_queue_button" id="<%= song.id %>">Queue</button>
+          <%= button_tag 'Queue', :id => song.id, :class => "btn btn-primary add_to_queue_button" %>
         </td>
       </tr>
     <% end %>
@@ -28,7 +28,7 @@ $("#songs_table").addTableFilter({
 });
 
 $("document").ready(function() {
-  var songs_in_queue = <%= Song.all_in_queue.blank? ? 0 : Song.all_in_queue.map(&:id) %>
+  var songs_in_queue = <%= Song.all_in_queue.blank? ? "[];" : Song.all_in_queue.map(&:id) %>
   var current_song = <%= Song.current_song.blank? ? 0 : Song.current_song.id %>
   songs_in_queue.push(current_song)
 

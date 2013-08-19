@@ -10,6 +10,7 @@ class SongsController < ApplicationController
   # GET /songs/1
   # GET /songs/1.json
   def show
+    @comment = Comment.new
   end
 
   def lyrics
@@ -86,7 +87,7 @@ class SongsController < ApplicationController
   def update
     respond_to do |format|
       if @song.update(song_params)
-        format.js   { render template: 'songs/update' } 
+        format.js   { render template: 'songs/update' }
         format.json { head :no_content }
       else
         format.js   { render template: 'songs/error' }
