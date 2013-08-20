@@ -1,14 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:destroy]
-  before_action :set_song,    only: [:index, :new, :create, :destroy]
-
-  def index
-    @comments = Comment.all
-  end
-
-  def new
-    @comment = Comment.new
-  end
+  before_action :set_song,    only: [:create, :destroy]
 
   def create
     @comment = Comment.new(comment_params)
