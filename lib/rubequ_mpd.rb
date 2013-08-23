@@ -7,9 +7,13 @@ module RubequMpd
     attr_accessor :mpd
 
     def initialize
-      @mpd = MPD.new RubequMpd.mpd_server, RubequMpd.mpd_port
+      @mpd = initialize_mpd
       connect
       consume
+    end
+
+    def initialize_mpd
+      MPD.new RubequMpd.mpd_server, RubequMpd.mpd_port
     end
 
     def consume
