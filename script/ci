@@ -1,9 +1,11 @@
 #!/bin/sh
-
+START_TIME=$(date +%s)
 bundle install
 bundle exec rake db:reset
 bundle exec rake db:test:prepare
 RAILS_ENV=test bundle exec rake spec
-
+END_TIME=$(date +%s)
+DIFF=$(( $END_TIME - $START_TIME ))
+echo "$DIFF seconds from bundle install to tests completing"
 
 
