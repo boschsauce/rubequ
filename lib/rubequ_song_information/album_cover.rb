@@ -10,7 +10,6 @@ module RubequSongInformation
         wrapper = discog_wrapper
         wrapper.nil? ? default_image : album_cover(wrapper, name)
       rescue Exception => e
-        puts e
         default_image
       end
     end
