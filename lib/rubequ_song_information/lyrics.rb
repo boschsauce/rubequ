@@ -6,11 +6,16 @@ module RubequSongInformation
     end
 
     def get_lyrics(band, song_name)
-      lyricfy.search(band, song_name).body(body_seperator)
+      search = lyricfy.search(band, song_name)
+      parse_search(search)
     end
 
     def body_seperator
       "<br>"
+    end
+
+    def parse_search(search)
+      search.body(body_seperator) unless search.nil?
     end
 
     def lyricfy
