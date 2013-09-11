@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
+# Switching to postgres database
+# found a good way to get started on osx http://postgresapp.com
 gem 'pg'
 
 gem 'puma'

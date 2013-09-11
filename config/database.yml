@@ -7,7 +7,7 @@ development:
   adapter: postgresql
   encoding: utf8
   database: rubequ_development
-  pool: 5
+  pool: 16
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -17,7 +17,7 @@ test:
   adapter: postgresql
   encoding: utf8
   database: rubequ_test
-  pool: 5
+  pool: 16
   host: localhost
 
 production:
