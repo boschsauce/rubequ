@@ -22,7 +22,7 @@ module RubequMpd
 
     def connect
       begin
-        @mpd.connect
+        @mpd.connect(true)
       rescue
         puts "Could not connect to MPD server."
         nil

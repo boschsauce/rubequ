@@ -98,6 +98,13 @@ class Song < ActiveRecord::Base
     song.blank? ? nil : Song.by_file(song.file)
   end
 
+  def self.last_song
+    mpd = RubequMpd::Mpd.new
+    song = mpd.current_song
+    mpd.disconnect
+    song.blank? ? nil : Song.by_file(song.file)
+  end
+
   def self.play
     mpd = RubequMpd::Mpd.new
     mpd.play

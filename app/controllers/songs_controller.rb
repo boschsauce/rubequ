@@ -1,14 +1,11 @@
 class SongsController < ApplicationController
+
   before_action :set_song, only: [:show, :lyrics, :add_to_queue, :edit, :update, :destroy]
 
-  # GET /songs
-  # GET /songs.json
   def index
     @songs = Song.all
   end
 
-  # GET /songs/1
-  # GET /songs/1.json
   def show
     @comment = Comment.new
   end
@@ -21,6 +18,13 @@ class SongsController < ApplicationController
 
   def current_song
     @song = Song.current_song
+    respond_to do |format|
+      format.json  { render :json => @song }
+    end
+  end
+
+  def last_song
+    @song = Song.last_song
     respond_to do |format|
       format.json  { render :json => @song }
     end
@@ -67,8 +71,6 @@ class SongsController < ApplicationController
     end
   end
 
-  # POST /songs
-  # POST /songs.json
   def create
     @song = Song.unscoped.new(song_params)
     respond_to do |format|
@@ -82,8 +84,6 @@ class SongsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /songs/1
-  # PATCH/PUT /songs/1.json
   def update
     respond_to do |format|
       if @song.update(song_params)
@@ -96,8 +96,6 @@ class SongsController < ApplicationController
     end
   end
 
-  # DELETE /songs/1
-  # DELETE /songs/1.json
   def destroy
     @song.destroy
     respond_to do |format|

@@ -34,13 +34,30 @@ refresh = ->
   $("#refresh").click ->
     get_current_song()
     get_music_queue(true)
+    get_last_song()
     Rubequ.messageCenter.info("Refreshed")
 
 reload = ->
   setInterval (->
     get_current_song()
+    get_last_song()
     get_music_queue(false)
   ), 5000
+
+
+get_last_played_song = ->
+  if $("#last-played-song").length > 0
+    $.ajax
+      url: "/last_song"
+      dataType: "json"
+      success: (data) ->
+        html = "<h4>Last Played Song</h4>"
+        if data != null
+          html += song_template(data)
+        else
+          html += ""
+        $("#last-played-song").html(html)
+        $("#last-played-song").parent().show()
 
 
 get_current_song = ->
@@ -49,34 +66,16 @@ get_current_song = ->
       url: "/current_song"
       dataType: "json"
       success: (data) ->
+        html = "<h4><i class='icon-music'></i>Current Song</h4>"
         if data != null
-          html = ""
-          html += "<h4><i class='icon-music'></i>Current Song</h4>"
-          html += "<div class='row'>"
-          html += "<table class='table'>"
-          html += "<tr>"
-          html += "<td class='span2'><a href='/songs/" + data.id + "'><img id='album-cover' src='" + data.album_cover + "' height='100' width='100' border='0' class='img-circle'></a></td>"
-          html += "<td class='span9'>"
-          html += "<strong><div id='band-name'>" + data.band  + "</div></strong>"
-          html += "<ul class='song_info'>"
-          html += "<li id='song-name'>" + data.name + "</li>"
-          html += "<li><a id='song-url' href='" + data.mp3_path + "' download><i class='icon-download'></i> Download</a></li>"
-          html += "<li><a href='/songs/" + data.id + "' data-action='viewsong' class='btn btn-small btn-info' id='song-info'>Song Info</a></li>"
-          html += "</ul>"
-          html += "</td>"
-          html += "</tr>"
-          html += "</table>"
-          html += "</div>"
-          $("#current-song").html(html)
-          $("#current-song").parent().show()
+          html += song_template(data)
         else
-          html = "<h4><i class='icon-music'></i>Current Song</h4>"
           html += "<hr>"
           html += "<div class='row'>"
           html += "<h5>No Song Currently Playing</h5>"
           html += "</div>"
-          $("#current-song").html(html)
-          $("#current-song").parent().show()
+        $("#current-song").html(html)
+        $("#current-song").parent().show()
 
 get_music_queue = (show_spinner) ->
   if $("#music-queue").length > 0
@@ -109,20 +108,7 @@ get_music_queue = (show_spinner) ->
         if data != null
           $("#music-queue").html("<h4>Music Queue</h4>")
           $.each data, (key, val) ->
-            html = "<div class='row'>"
-            html += "<table class='table'>"
-            html += "<tr>"
-            html += "<td class='span2'><a href='/songs/" + val.id + "'><img id='album-cover' src='" + val.album_cover +  "' height='100' width='100' class='img-circle' border='0'></a></td>"
-            html += "<td class='span9'>"
-            html += "<strong><div id='band-name'>" + val.band + "</div></strong>"
-            html += "<ul class='song_info'>"
-            html += "<li id='song-name'>" + val.name + "</li>"
-            html += "<li><a id='song-url' href='" + val.mp3_path + "' download><i class='icon-download'></i> Download</a></i>"
-            html += "<li><a href='/songs/" + val.id + "' class='btn btn-small btn-info' id='song-info' data-id='" + val.id + "'>Song Info</a></li>"
-            html += "</ul>"
-            html += "</tr>"
-            html += "</table>"
-            html += "</div>"
+            html = song_template(val)
             $("#music-queue").append(html)
         else
           html =  "<h4>Music Queue</h4>"
@@ -136,7 +122,26 @@ get_music_queue = (show_spinner) ->
         if show_spinner is true
           spinner.stop()
 
+
+song_template = (val) ->
+  html = "<div class='row'>"
+  html += "<table class='table'>"
+  html += "<tr>"
+  html += "<td class='span2'><a href='/songs/" + val.id + "'><img id='album-cover' src='" + val.album_cover +  "' height='100' width='100' class='img-circle' border='0'></a></td>"
+  html += "<td class='span9'>"
+  html += "<strong><div id='band-name'>" + val.band + "</div></strong>"
+  html += "<ul class='song_info'>"
+  html += "<li id='song-name'>" + val.name + "</li>"
+  html += "<li><a id='song-url' href='" + val.mp3_path + "' download><i class='icon-download'></i> Download</a></i>"
+  html += "<li><a href='/songs/" + val.id + "' class='btn btn-small btn-info' id='song-info' data-id='" + val.id + "'>Song Info</a></li>"
+  html += "</ul>"
+  html += "</tr>"
+  html += "</table>"
+  html += "</div>"
+
+
 $(document).ready get_current_song
+$(document).ready get_last_played_song
 $(document).ready get_music_queue
 $(document).ready play
 $(document).ready pause
@@ -145,6 +150,7 @@ $(document).ready refresh
 $(document).ready reload
 
 $(document).on "page:load", get_current_song
+$(document).on "page:load", get_last_played_song
 $(document).on "page:load", get_music_queue
 $(document).on "page:load", play
 $(document).on "page:load", pause
