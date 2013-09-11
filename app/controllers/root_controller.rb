@@ -29,10 +29,13 @@ class RootController < ApplicationController
     sse = Reloader::SSE.new(response.stream)
     mpd = RubequMpd::Mpd.new
     begin
+      a = Thread.new {
         mpd.mpd.on(:volume) do |volume|
-          puts "volume: #{volume}"
-          sse.write({ :volume => mpd.volume })
+          sse.write({ :volume => volume}, :event => 'refresh')
         end
+      }
+      sleep 0.1 while a.status!='sleep'
+      a.run
     rescue IOError
       # When the client disconnects, we'll get an IOError on write
     ensure
