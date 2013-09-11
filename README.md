@@ -1,7 +1,7 @@
 # Welcome to Rubequ
 
 [![Build Status](https://api.travis-ci.org/willywos/rubequ.png?branch=master)](https://travis-ci.org/willywos/rubequ)
-
+[![Code Climate](https://codeclimate.com/github/willywos/rubequ.png)](https://codeclimate.com/github/willywos/rubequ)
 
 Rubequ is a web-application that was made to run on the raspberry pi and
 interfaces with the Music Player Deamon (MPD). To allow you to turn your raspberry
