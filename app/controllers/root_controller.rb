@@ -27,10 +27,10 @@ class RootController < ApplicationController
   def volume_live
     response.headers['Content-Type'] = 'text/event-stream'
     sse = Reloader::SSE.new(response.stream)
-    mpd = RubequMpd::Mpd.new
+    rubequ_mpd = RubequMpd::Mpd.new
     begin
       a = Thread.new {
-        mpd.mpd.on(:volume) do |volume|
+        rubequ_mpd.mpd.on(:volume) do |volume|
           sse.write({ :volume => volume}, :event => 'refresh')
         end
       }

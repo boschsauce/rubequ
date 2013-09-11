@@ -34,13 +34,13 @@ refresh = ->
   $("#refresh").click ->
     get_current_song()
     get_music_queue(true)
-    get_last_song()
+    get_last_played_song()
     Rubequ.messageCenter.info("Refreshed")
 
 reload = ->
   setInterval (->
     get_current_song()
-    get_last_song()
+    get_last_played_song()
     get_music_queue(false)
   ), 5000
 

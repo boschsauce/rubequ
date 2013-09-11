@@ -7,6 +7,18 @@ getVolume = ->
     $("#volume").slider( "value", 0 );
   )
 
+jQuery(document).ready ->
+  setTimeout (->
+    source = new EventSource("/volume_live")
+    source.addEventListener "refresh", (e) ->
+      console.log "in here"
+      console.log e.data
+      #window.location.reload()
+
+  ), 1
+
+
+
 updateVolume = (value) ->
   if value
     $.ajax(
@@ -34,9 +46,11 @@ reloadVolume = ->
     getVolume()
   ), 5000
 
-$(document).ready volume_control
-$(document).ready getVolume
-$(document).ready reloadVolume
+  #$(document).ready volume_control
+  #$(document).ready getVolume
+  #$(document).ready reloadVolume
+$(document).ready update_volume_live
 
-$(document).on "page:load", volume_control
-$(document).on "page:load", getVolume 
+#$(document).on "page:load", volume_control
+#$(document).on "page:load", getVolume
+
