@@ -38,8 +38,6 @@ queue_song = ->
 
 $(document).ready queue_song
 $(document).ready lyrics
-$(document).ready check_mpd_connected
 
 $(document).on "page:load", lyrics
-$(document).on "page:load", check_mpd_connected
 $(document).on "page:load", queue_song

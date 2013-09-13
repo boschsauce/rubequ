@@ -1,26 +1,15 @@
-getVolume = ->
-  jqxhr = $.getJSON("/volume", (val) ->
-    $("#volume-value").text val
-    $("#volume").slider( "value", val );
-  ).fail(->
-    $("#volume-value").text 0
-    $("#volume").slider( "value", 0 );
-  )
-
-jQuery(document).ready ->
+volume = ->
   setTimeout (->
     source = new EventSource("/volume_live")
     source.addEventListener "refresh", (e) ->
-      console.log "in here"
-      console.log e.data
-      #window.location.reload()
-
+      data = $.parseJSON(e.data)
+      console.log data.volume
+      $("#volume-value").text data.volume
+      $("#volume").slider( "value", data.volume );
   ), 1
 
-
-
 updateVolume = (value) ->
-  if value
+  unless isNaN(value)
     $.ajax(
       type: "POST"
       url: "/volume/" + value
@@ -39,18 +28,11 @@ volume_control = ->
       updateVolume(ui.value)
 
   $("#volume-value").text $("#volume").slider("value")
-  getVolume
 
-reloadVolume = ->
-  setInterval (->
-    getVolume()
-  ), 5000
-
-  #$(document).ready volume_control
-  #$(document).ready getVolume
-  #$(document).ready reloadVolume
-$(document).ready update_volume_live
-
-#$(document).on "page:load", volume_control
-#$(document).on "page:load", getVolume
+$(document).ready volume_control
+$(document).ready volume
+$(document).ready updateVolume
+$(document).on "page:load", volume_control
+$(document).on "page:load", volume
+$(document).on "page:load", updateVolume
 

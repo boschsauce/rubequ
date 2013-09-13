@@ -24,7 +24,6 @@ module RubequMpd
       begin
         @mpd.connect(true)
       rescue
-        puts "Could not connect to MPD server."
         nil
       end
     end

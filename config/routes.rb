@@ -2,7 +2,6 @@ Rubequ::Application.routes.draw do
   root :to => 'root#index'
   get '/connected', :controller => "root", :action => "connected"
   get '/current_song', :controller => "songs", :action => "current_song"
-  get '/last_song', :controller => "songs", :action => "last_song"
   get '/songs_in_queue', :controller => "songs", :action => "songs_in_queue"
 
   get '/play', :controller => "songs", :action => "play"

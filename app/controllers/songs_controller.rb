@@ -23,13 +23,6 @@ class SongsController < ApplicationController
     end
   end
 
-  def last_song
-    @song = Song.last_song
-    respond_to do |format|
-      format.json  { render :json => @song }
-    end
-  end
-
   def songs_in_queue
     @songs = Song.all_in_queue
     respond_to do |format|

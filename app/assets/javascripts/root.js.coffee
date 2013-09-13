@@ -34,30 +34,13 @@ refresh = ->
   $("#refresh").click ->
     get_current_song()
     get_music_queue(true)
-    get_last_played_song()
     Rubequ.messageCenter.info("Refreshed")
 
 reload = ->
   setInterval (->
     get_current_song()
-    get_last_played_song()
     get_music_queue(false)
   ), 5000
-
-
-get_last_played_song = ->
-  if $("#last-played-song").length > 0
-    $.ajax
-      url: "/last_song"
-      dataType: "json"
-      success: (data) ->
-        html = "<h4>Last Played Song</h4>"
-        if data != null
-          html += song_template(data)
-        else
-          html += ""
-        $("#last-played-song").html(html)
-        $("#last-played-song").parent().show()
 
 
 get_current_song = ->
@@ -141,7 +124,6 @@ song_template = (val) ->
 
 
 $(document).ready get_current_song
-$(document).ready get_last_played_song
 $(document).ready get_music_queue
 $(document).ready play
 $(document).ready pause
@@ -150,7 +132,6 @@ $(document).ready refresh
 $(document).ready reload
 
 $(document).on "page:load", get_current_song
-$(document).on "page:load", get_last_played_song
 $(document).on "page:load", get_music_queue
 $(document).on "page:load", play
 $(document).on "page:load", pause
