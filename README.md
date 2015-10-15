@@ -3,23 +3,23 @@
 [![Build Status](https://api.travis-ci.org/willywos/rubequ.png?branch=master)](https://travis-ci.org/willywos/rubequ)
 [![Code Climate](https://codeclimate.com/github/willywos/rubequ.png)](https://codeclimate.com/github/willywos/rubequ)
 
-Rubequ is a web-application that was made to run on the raspberry pi and
-interfaces with the Music Player Deamon (MPD). To allow you to turn your raspberry
-pi into a little jukebox. We use ours around the office to play music.
-You can use it on a number of different versions of linux and even OSX.
+Rubequ is a web-application made to run on the raspberry pi and
+interfaces with the Music Player Deamon (MPD). It allows you to turn your Raspberry
+Pi into a little jukebox. We use ours around the office to play music.
+You can use it on a number of different versions of Linux and even OSX.
 
 ![picture alt](http://i.imgur.com/fWg0xRI.png?1 "Home Page")
 ![picture alt](http://i.imgur.com/BZKeStT.png?1 "All Songs")
 
 ## Installing MPD
 
-On osx you should be able to install it with brew.
+On OSX you should be able to install it with brew.
 
 ```
 $ brew install mpd
 ```
 
-On ubuntu you can use apt-get
+On Ubuntu you can use apt-get
 
 ```
 $ sudo apt-get install mpd
@@ -28,8 +28,8 @@ $ sudo apt-get install mpd
 ## Installing Rubequ
 
 Since this is still in development and I haven't been able to figure out a
-way to package the app into a gem. You'll need to git clone the site.
-I would recommend to install it in your /home directory so you don't
+way to package the app into a gem, you'll need to git clone the site.
+I recommend to installing it in your /home directory so you don't
 have to worry about permission issues.
 
 ```
@@ -44,10 +44,10 @@ $ script/ci #run db updates and tests
 
 ## MPD Configuration
 
-There is some small configuration you have to do to get MPD working
+There is some small configuration needed to get MPD working
 correctly with the app.
 
-In your home directory you need to create a .mpd file and a .mpd directory
+In your home directory you will need to create a .mpd file and a .mpd directory
 
 ```
 $ echo >> ~/.mpdconf
@@ -122,9 +122,9 @@ audio_output {
 ```
 
 You can see all the other configurations on the [MPD site](http://mpd.wikia.com/wiki/Configuration).
-Make sure to change the music_directory where you downloaded rubequ.
+Make sure to change the music_directory where you downloaded Rubequ.
 
-Once the service is configured you have to restart MPD and start it back up again
+Once the service is configured, restart MPD and start it back up again
 so it can read the new configurations. You'll also be able to see any errors
 in your configuration when the server starts up.
 
@@ -133,11 +133,11 @@ $ mpd --kill
 $ mpd
 ```
 
-Since Rubequ is still in development, it's best to just run it in
+Since Rubequ is still in development, it's best to run it in
 development mode for right now.
 
 Modify the connection settings for the MPD service. If you are running
-MPD on another server/computer. The defaults are below.
+MPD on another server/computer, the defaults are below.
 
 ```
 #~/rubequ/config/initializers/rubequ_mpd_init.rb
